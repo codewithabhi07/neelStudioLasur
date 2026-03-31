@@ -36,7 +36,7 @@ section { padding: 120px 0; }
 /* Scroll Progress Bar */
 .scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: var(--aurora-gradient); z-index: 2001; }
 
-/* WhatsApp Float - Corrected CSS */
+/* WhatsApp Float */
 .whatsapp-float {
     position: fixed;
     bottom: 30px;
@@ -54,21 +54,6 @@ section { padding: 120px 0; }
     z-index: 9999;
     animation: pulse-whatsapp 2s infinite;
     text-decoration: none;
-}
-
-.whatsapp-float span {
-    position: absolute;
-    right: 70px;
-    background: #25D366;
-    color: white;
-    padding: 8px 20px;
-    border-radius: 30px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    white-space: nowrap;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    pointer-events: none;
-    transition: 0.3s;
 }
 
 @keyframes pulse-whatsapp {
@@ -209,12 +194,11 @@ section { padding: 120px 0; }
     .pricing-grid { grid-template-columns: repeat(2, 1fr); }
     .footer-grid { grid-template-columns: 1fr 1fr; }
     .footer-brand { grid-column: span 2; text-align: center; }
-    .footer-brand p { margin: 0 auto; }
     .about-grid { grid-template-columns: 1fr; text-align: center; }
 }
 
 @media (max-width: 768px) {
-    section { padding: 80px 0; }
+    section { padding: 100px 0; }
     .navbar { height: 75px; background: rgba(10, 8, 26, 0.95); backdrop-filter: blur(15px); }
     .nav-links { position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; background: var(--dark); flex-direction: column; justify-content: center; align-items: center; transition: 0.6s; z-index: 1000; gap: 35px; }
     .nav-links.active { right: 0; }
@@ -247,9 +231,6 @@ section { padding: 120px 0; }
     .footer-social .social-links { justify-content: center; }
     
     .exp-badge { padding: 20px; right: 10px; bottom: -20px; }
-    
-    /* Corrected WhatsApp label for mobile */
-    .whatsapp-float span { display: none; }
     .whatsapp-float { bottom: 20px; right: 20px; width: 55px; height: 55px; font-size: 1.8rem; }
 }
 
