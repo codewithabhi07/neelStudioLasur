@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neel Studio | Advanced Portfolio Admin</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .admin-login { height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--dark); }
+        .login-card { background: var(--dark-lighter); padding: 40px; border-radius: 30px; border: 1px solid var(--glass); width: 100%; max-width: 400px; text-align: center; }
+        .admin-panel { display: none; padding: 40px 20px; max-width: 1400px; margin: 0 auto; }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        .admin-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 30px; }
+        
+        .category-upload-section { margin-bottom: 40px; padding: 25px; background: rgba(255,255,255,0.02); border-radius: 25px; border: 1px solid var(--glass); }
+        .category-title { color: var(--secondary-cyan); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.2rem; }
+        
+        .upload-zone-mini { border: 2px dashed var(--glass-heavy); padding: 20px; border-radius: 15px; text-align: center; cursor: pointer; margin-bottom: 20px; }
+        .upload-zone-mini:hover { border-color: var(--primary); background: rgba(233, 30, 99, 0.05); }
+        
+        .admin-gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+        .admin-gallery-item { position: relative; aspect-ratio: 1; border-radius: 12px; overflow: hidden; }
+        .admin-gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .delete-img { position: absolute; top: 5px; right: 5px; background: rgba(255,0,0,0.8); color: white; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 12px; }
+        
+        @media (max-width: 1100px) { .admin-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body class="pro-dashboard">
+    <div id="loginScreen" class="admin-login">
+        <div class="login-card">
+            <i class="fas fa-user-shield" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+            <h2>Admin Access</h2>
+            <div class="form-group"><input type="password" id="adminPass" placeholder="Password"></div>
+            <button class="btn-primary" style="width: 100%;" onclick="checkLogin()">Login</button>
+        </div>
+    </div>
+
+    <div id="adminPanel" class="admin-panel">
+        <header class="admin-header">
+            <div><h1>Portfolio Manager</h1><p style="color: var(--text-muted);">Customized Control Panel</p></div>
+            <button class="btn-primary" style="background: #333;" onclick="logout()">Logout</button>
+        </header>
+
+        <div class="admin-grid">
+            <div class="left-col">
+                <div class="card">
+                    <h2><i class="fas fa-store"></i> Studio Branding</h2>
+                    <div class="form-group"><label>Studio Name</label><input type="text" id="adm-studioName"></div>
+                    <div class="form-group"><label>WhatsApp Number</label><input type="text" id="adm-whatsapp"></div>
+                    <button class="btn-primary" style="width: 100%;" onclick="saveStudioInfo()">Update Branding</button>
+                </div>
+
+                <div class="card" style="margin-top: 30px;">
+                    <h2><i class="fas fa-box-open"></i> Customize Packages</h2>
+                    <div id="adm-package-list"></div>
+                </div>
+            </div>
+
+            <div class="right-col">
+                <div class="card">
+                    <h2><i class="fas fa-images"></i> Categorized Gallery Management</h2>
+                    
+                    <!-- Wedding Section -->
+                    <div class="category-upload-section">
+                        <div class="category-title"><i class="fas fa-heart"></i> Wedding Photos</div>
+                        <label class="upload-zone-mini">
+                            <i class="fas fa-plus-circle"></i> Upload to Wedding
+                            <input type="file" style="display: none;" accept="image/*" onchange="uploadToCategory(this, 'wedding')">
+                        </label>
+                        <div id="gallery-wedding" class="admin-gallery-grid"></div>
+                    </div>
+
+                    <!-- Pre-Wedding Section -->
+                    <div class="category-upload-section">
+                        <div class="category-title"><i class="fas fa-camera-retro"></i> Pre-Wedding Photos</div>
+                        <label class="upload-zone-mini">
+                            <i class="fas fa-plus-circle"></i> Upload to Pre-Wedding
+                            <input type="file" style="display: none;" accept="image/*" onchange="uploadToCategory(this, 'prewedding')">
+                        </label>
+                        <div id="gallery-prewedding" class="admin-gallery-grid"></div>
+                    </div>
+
+                    <!-- Maternity Section -->
+                    <div class="category-upload-section">
+                        <div class="category-title"><i class="fas fa-baby"></i> Maternity Photos</div>
+                        <label class="upload-zone-mini">
+                            <i class="fas fa-plus-circle"></i> Upload to Maternity
+                            <input type="file" style="display: none;" accept="image/*" onchange="uploadToCategory(this, 'maternity')">
+                        </label>
+                        <div id="gallery-maternity" class="admin-gallery-grid"></div>
+                    </div>
+
+                    <!-- Cinematic Section -->
+                    <div class="category-upload-section">
+                        <div class="category-title"><i class="fas fa-video"></i> Cinematic Shots</div>
+                        <label class="upload-zone-mini">
+                            <i class="fas fa-plus-circle"></i> Upload to Cinematic
+                            <input type="file" style="display: none;" accept="image/*" onchange="uploadToCategory(this, 'cinematic')">
+                        </label>
+                        <div id="gallery-cinematic" class="admin-gallery-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkLogin() {
+            if (document.getElementById('adminPass').value === 'admin123') {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                loadAdminData();
+            } else { alert("Incorrect Password!"); }
+        }
+        function logout() { location.reload(); }
+
+        let portfolioData = JSON.parse(localStorage.getItem('publicPortfolio')) || [];
+        let studioInfo = JSON.parse(localStorage.getItem('studioSettings')) || { studioName: 'Neel Studio', studioPhone: '+91 83906 29068' };
+        let packages = JSON.parse(localStorage.getItem('packages')) || [];
+
+        function loadAdminData() {
+            document.getElementById('adm-studioName').value = studioInfo.studioName;
+            document.getElementById('adm-whatsapp').value = studioInfo.studioPhone;
+            renderAdminPackages();
+            renderAllGalleries();
+        }
+
+        function saveStudioInfo() {
+            studioInfo.studioName = document.getElementById('adm-studioName').value;
+            studioInfo.studioPhone = document.getElementById('adm-whatsapp').value;
+            localStorage.setItem('studioSettings', JSON.stringify(studioInfo));
+            alert("Studio information updated!");
+        }
+
+        function renderAdminPackages() {
+            const list = document.getElementById('adm-package-list');
+            list.innerHTML = packages.map((pkg, idx) => `
+                <div style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 20px; margin-bottom: 15px; border: 1px solid var(--glass);">
+                    <div class="form-group"><label>Package Name</label><input type="text" value="${pkg.name}" onchange="updatePkg(${idx}, 'name', this.value)"></div>
+                    <div class="form-group"><label>Price ₹</label><input type="number" value="${pkg.price}" onchange="updatePkg(${idx}, 'price', this.value)"></div>
+                    <div class="form-group"><label>Inclusions</label><textarea rows="2" onchange="updatePkg(${idx}, 'inclusions', this.value)">${pkg.inclusions || ''}</textarea></div>
+                </div>
+            `).join('');
+        }
+
+        function updatePkg(idx, field, val) {
+            packages[idx][field] = field === 'price' ? parseFloat(val) : val;
+            localStorage.setItem('packages', JSON.stringify(packages));
+        }
+
+        function uploadToCategory(input, category) {
+            const file = input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const maxDim = 1200;
+                    let w = img.width, h = img.height;
+                    if (w > h) { if (w > maxDim) { h *= maxDim/w; w = maxDim; } }
+                    else { if (h > maxDim) { w *= maxDim/h; h = maxDim; } }
+                    canvas.width = w; canvas.height = h;
+                    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                    portfolioData.push({ id: Date.now(), category: category, title: 'Capture', image: canvas.toDataURL('image/jpeg', 0.7) });
+                    localStorage.setItem('publicPortfolio', JSON.stringify(portfolioData));
+                    renderAllGalleries();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function renderAllGalleries() {
+            ['wedding', 'prewedding', 'maternity', 'cinematic'].forEach(cat => {
+                const grid = document.getElementById(`gallery-${cat}`);
+                grid.innerHTML = portfolioData.filter(item => item.category === cat).map(item => `
+                    <div class="admin-gallery-item">
+                        <img src="${item.image}">
+                        <button class="delete-img" onclick="deleteItem(${item.id})">×</button>
+                    </div>
+                `).join('');
+            });
+        }
+
+        function deleteItem(id) {
+            if (confirm("Delete this photo?")) {
+                portfolioData = portfolioData.filter(item => item.id !== id);
+                localStorage.setItem('publicPortfolio', JSON.stringify(portfolioData));
+                renderAllGalleries();
+            }
+        }
+    </script>
+</body>
+</html>

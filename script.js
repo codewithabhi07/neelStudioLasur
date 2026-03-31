@@ -1,17 +1,29 @@
-// Gallery Data
-const galleryData = [
-    { id: 1, category: 'wedding', title: 'The Royal Wedding', image: 'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-    { id: 2, category: 'prewedding', title: 'Sunset Romance', image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-    { id: 3, category: 'maternity', title: 'Pure Joy', image: 'https://images.unsplash.com/photo-1559599101-f09722fb4948?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-    { id: 4, category: 'cinematic', title: 'Modern Vision', image: 'https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-    { id: 5, category: 'wedding', title: 'Elegant Bride', image: 'https://images.unsplash.com/photo-1544120190-2751b8fc23bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-    { id: 6, category: 'prewedding', title: 'Beach Love', image: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-    { id: 7, category: 'cinematic', title: 'Cinematic Story', image: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-    { id: 8, category: 'wedding', title: 'Soulmates', image: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' },
-    { id: 9, category: 'maternity', title: 'Graceful Motherhood', image: 'https://images.unsplash.com/photo-1516724562728-afc824a36e84?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80' }
+// Dynamic Data from Admin Panel
+let portfolioData = JSON.parse(localStorage.getItem('publicPortfolio')) || [
+    { id: 1, category: 'wedding', title: 'The Royal Wedding', image: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80' },
+    { id: 2, category: 'prewedding', title: 'Palace Romance', image: 'https://images.unsplash.com/photo-1621112904887-419379ce6824?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80' },
+    { id: 3, category: 'wedding', title: 'The Elegant Bride', image: 'https://images.unsplash.com/photo-1544120190-2751b8fc23bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80' },
+    { id: 4, category: 'wedding', title: 'Mehendi Moments', image: 'https://images.unsplash.com/photo-1632152271320-990ef6600001?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80' },
+    { id: 5, category: 'cinematic', title: 'Groom Portrait', image: 'https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80' },
+    { id: 6, category: 'wedding', title: 'Pheras & Promises', image: 'https://images.unsplash.com/photo-1597157639073-69284dc0f9a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80' },
+    { id: 7, category: 'prewedding', title: 'Golden Hour Love', image: 'https://images.unsplash.com/photo-1510076857177-7470076d4098?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80' },
+    { id: 8, category: 'wedding', title: 'Bridal Glow', image: 'https://images.unsplash.com/photo-1607190074257-dd4b7af0309f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80' },
+    { id: 9, category: 'maternity', title: 'Divine Journey', image: 'https://images.unsplash.com/photo-1516724562728-afc824a36e84?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80' }
 ];
 
+let studioSettings = JSON.parse(localStorage.getItem('studioSettings')) || { 
+    studioName: 'Neel Studio',
+    studioPhone: '+91 83906 29068'
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Sync Studio Info
+    const logoSpan = document.querySelector('.logo span');
+    if (logoSpan) logoSpan.innerText = studioSettings.studioName;
+    
+    const contactPhone = document.querySelector('.footer-info-item[href^="tel"] span');
+    if (contactPhone) contactPhone.innerText = studioSettings.studioPhone;
+
     // Initialize AOS
     AOS.init({
         duration: 1000,
@@ -26,17 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Scroll Effect for Navbar
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
+        if (window.scrollY > 50) navbar.classList.add('scrolled');
+        else navbar.classList.remove('scrolled');
     });
 
     // Render Gallery
     function renderGallery(filter = 'all') {
+        if (!galleryGrid) return;
         galleryGrid.innerHTML = '';
-        const filteredData = filter === 'all' ? galleryData : galleryData.filter(item => item.category === filter);
+        const filteredData = filter === 'all' ? portfolioData : portfolioData.filter(item => item.category === filter);
 
         filteredData.forEach((item, index) => {
             const galleryItem = document.createElement('div');
@@ -56,28 +66,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initial Render
-    renderGallery();
-
     // FAQ Toggle
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
         question.addEventListener('click', () => {
             const isActive = item.classList.contains('active');
-            // Close all other items
             faqItems.forEach(i => i.classList.remove('active'));
-            // Toggle current item
             if (!isActive) item.classList.add('active');
         });
     });
+
+    // Initial Render
+    renderGallery();
 
     // Filter Logic
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            
             const filter = btn.getAttribute('data-filter');
             renderGallery(filter);
             setTimeout(() => AOS.refresh(), 100);
@@ -88,22 +95,24 @@ document.addEventListener('DOMContentLoaded', () => {
 // Mobile Menu Toggle
 function toggleMenu() {
     const navLinks = document.getElementById('navLinks');
-    if (window.innerWidth <= 768) {
-        navLinks.classList.toggle('active');
-    }
+    if (window.innerWidth <= 768) navLinks.classList.toggle('active');
 }
 
 // Lightbox Logic
 function openLightbox(imgSrc) {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
-    lightboxImg.src = imgSrc;
-    lightbox.style.display = 'flex';
-    document.body.style.overflow = 'hidden'; // Prevent scroll
+    if (lightbox && lightboxImg) {
+        lightboxImg.src = imgSrc;
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
 }
 
 function closeLightbox() {
     const lightbox = document.getElementById('lightbox');
-    lightbox.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Restore scroll
+    if (lightbox) {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
 }
