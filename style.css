@@ -306,6 +306,57 @@ section {
     60% {transform: translateY(-7px) translateX(-50%);}
 }
 
+/* About Section */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.about-img {
+    position: relative;
+}
+
+.about-img img {
+    width: 100%;
+    border-radius: 40px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+}
+
+.exp-badge {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    background: var(--aurora-gradient);
+    padding: 30px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(233, 30, 99, 0.3);
+}
+
+.exp-badge h3 { font-size: 2.5rem; margin-bottom: 0; }
+.exp-badge p { font-size: 0.8rem; text-transform: uppercase; font-weight: 700; }
+
+.about-text h2 { font-size: 3rem; margin-bottom: 25px; line-height: 1.2; }
+.about-text p { font-size: 1.1rem; opacity: 0.7; margin-bottom: 30px; }
+
+.about-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.feat-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.feat-item i { color: var(--primary); }
+
 /* Stats Section */
 .stats {
     background: var(--dark-lighter);
@@ -349,6 +400,50 @@ section {
     opacity: 0.6;
     font-weight: 600;
 }
+
+/* Showreel */
+.video-container {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 40px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--glass);
+}
+
+.video-placeholder {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.video-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background: var(--aurora-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: white;
+    box-shadow: 0 0 50px rgba(233, 30, 99, 0.5);
+    transition: 0.3s;
+}
+
+.video-placeholder:hover .play-btn { transform: translate(-50%, -50%) scale(1.1); }
+.video-placeholder:hover img { transform: scale(1.05); opacity: 0.6; }
 
 /* Gallery Section */
 .filter-btns {
@@ -606,6 +701,66 @@ section {
     width: 100%;
 }
 
+/* Testimonials */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.test-card {
+    background: var(--dark-lighter);
+    padding: 50px;
+    border-radius: 40px;
+    border: 1px solid var(--glass);
+    position: relative;
+}
+
+.quote-icon { font-size: 2.5rem; color: var(--primary); opacity: 0.2; margin-bottom: 20px; }
+.test-card p { font-size: 1.1rem; font-style: italic; margin-bottom: 30px; opacity: 0.8; }
+
+.client-info { display: flex; align-items: center; gap: 20px; }
+.client-info img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary); }
+.client-info h4 { margin-bottom: 2px; }
+.client-info small { color: var(--secondary); font-weight: 600; }
+
+/* FAQ Section */
+.faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: var(--glass);
+    margin-bottom: 15px;
+    border-radius: 20px;
+    border: 1px solid var(--glass);
+    overflow: hidden;
+}
+
+.faq-question {
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.faq-question:hover { background: rgba(255,255,255,0.02); }
+.faq-question h3 { font-size: 1.1rem; margin-bottom: 0; font-weight: 600; }
+.faq-question i { color: var(--primary); transition: 0.3s; }
+
+.faq-answer {
+    padding: 0 30px;
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-item.active .faq-answer { padding: 0 30px 30px 30px; max-height: 200px; }
+.faq-item.active .faq-question i { transform: rotate(45deg); }
+
 /* Quote Section */
 .quote-section {
     background: var(--dark-lighter);
@@ -742,6 +897,8 @@ section {
     .footer-brand { grid-column: span 2; text-align: center; }
     .footer-brand p { margin: 0 auto; }
     .footer-brand .logo { justify-content: center; }
+    .about-grid { grid-template-columns: 1fr; gap: 50px; }
+    .testimonials-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
@@ -774,4 +931,5 @@ section {
     .footer-brand { grid-column: span 1; }
     .footer-info-item { justify-content: center; }
     .footer-social .social-links { justify-content: center; }
+    .exp-badge { padding: 20px; right: 0; }
 }
