@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neel Studio | Professional Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/918390629068" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span>Chat with us</span>
+    </a>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-camera-retro"></i>
+                <span>NEEL STUDIO</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+                <li><a href="#gallery" onclick="toggleMenu()">Work</a></li>
+                <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+                <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+            </ul>
+            <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <div class="badge" data-aos="fade-down">Premium Photography Studio</div>
+            <h1 data-aos="fade-up">Capturing Moments, <br><span>Creating Memories.</span></h1>
+            <p data-aos="fade-up" data-aos-delay="200">Professional Wedding, Fashion & Cinematic Films in Premium Quality.</p>
+            <div class="hero-btns" data-aos="fade-up" data-aos-delay="400">
+                <a href="#gallery" class="btn-primary">Explore Work</a>
+                <a href="#contact" class="btn-outline">Book a Session</a>
+            </div>
+        </div>
+        <div class="scroll-down"><i class="fas fa-chevron-down"></i></div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <h3 class="counter">200+</h3>
+                <p>Happy Clients</p>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-icon"><i class="fas fa-heart"></i></div>
+                <h3 class="counter">150+</h3>
+                <p>Wedding & Engagement</p>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-icon"><i class="fas fa-camera"></i></div>
+                <h3 class="counter">100+</h3>
+                <p>Pre-wedding Shoots</p>
+            </div>
+            <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                <div class="stat-icon"><i class="fas fa-building"></i></div>
+                <h3 class="counter">20+</h3>
+                <p>Corporate Events</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="section-title">
+                <span class="sub-title">Our Masterpieces</span>
+                <h2>Visual Stories</h2>
+                <div class="line"></div>
+            </div>
+            
+            <div class="filter-btns">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="wedding">Wedding</button>
+                <button class="filter-btn" data-filter="prewedding">Pre-Wedding</button>
+                <button class="filter-btn" data-filter="maternity">Maternity</button>
+                <button class="filter-btn" data-filter="cinematic">Cinematic</button>
+            </div>
+
+            <div class="gallery-grid">
+                <!-- Gallery items will be added via script -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox">&times;</span>
+        <img id="lightboxImg" src="" alt="Full Image">
+    </div>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title">
+                <span class="sub-title">What We Do</span>
+                <h2>Our Services</h2>
+                <div class="line"></div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up">
+                    <div class="card-icon"><i class="fas fa-ring"></i></div>
+                    <h3>Wedding Photography</h3>
+                    <p>Capturing every emotion of your special day with cinematic perfection and artistic vision.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-icon"><i class="fas fa-video"></i></div>
+                    <h3>Cinematography</h3>
+                    <p>Professional high-end film-making that tells your unique love story like a feature movie.</p>
+                </div>
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-icon"><i class="fas fa-baby"></i></div>
+                    <h3>Baby & Maternity</h3>
+                    <p>Beautiful, heartwarming portraits of your little ones and the magical journey of motherhood.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-title">
+                <span class="sub-title">Investment</span>
+                <h2>Our Packages</h2>
+                <div class="line"></div>
+            </div>
+            <div class="pricing-grid">
+                <!-- Basic Package -->
+                <div class="pricing-card" data-aos="fade-up">
+                    <div class="pkg-header">
+                        <h3>Basic</h3>
+                        <div class="price">₹15,000</div>
+                    </div>
+                    <ul class="pkg-features">
+                        <li><i class="fas fa-check"></i> 1 Lead Photographer</li>
+                        <li><i class="fas fa-check"></i> 30 High-End Edited Photos</li>
+                        <li><i class="fas fa-check"></i> All Raw Data Provided</li>
+                        <li><i class="fas fa-check"></i> Online Gallery Access</li>
+                        <li><i class="fas fa-check"></i> 1 Day Coverage</li>
+                    </ul>
+                    <a href="#contact" class="btn-outline">Book Basic</a>
+                </div>
+                <!-- Silver Package -->
+                <div class="pricing-card featured" data-aos="fade-up" data-aos-delay="100">
+                    <div class="pkg-badge">Most Popular</div>
+                    <div class="pkg-header">
+                        <h3>Silver</h3>
+                        <div class="price">₹35,000</div>
+                    </div>
+                    <ul class="pkg-features">
+                        <li><i class="fas fa-check"></i> 1 Photographer + 1 Cinematographer</li>
+                        <li><i class="fas fa-check"></i> 50 High-End Edited Photos</li>
+                        <li><i class="fas fa-check"></i> 3-5 Min Cinematic Highlight</li>
+                        <li><i class="fas fa-check"></i> All Raw Data Provided</li>
+                        <li><i class="fas fa-check"></i> 1 Minute Instagram Reel</li>
+                    </ul>
+                    <a href="#contact" class="btn-primary">Book Silver</a>
+                </div>
+                <!-- Gold Package -->
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="pkg-header">
+                        <h3>Gold</h3>
+                        <div class="price">₹75,000</div>
+                    </div>
+                    <ul class="pkg-features">
+                        <li><i class="fas fa-check"></i> 2 Photographers + 2 Cinematographers</li>
+                        <li><i class="fas fa-check"></i> All Photos Edited (Unlimited)</li>
+                        <li><i class="fas fa-check"></i> 15-20 Min Full Cinematic Film</li>
+                        <li><i class="fas fa-check"></i> 12x36 Premium Wedding Album</li>
+                        <li><i class="fas fa-check"></i> Drone Coverage Included</li>
+                    </ul>
+                    <a href="#contact" class="btn-outline">Book Gold</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section id="contact" class="quote-section">
+        <div class="container">
+            <div class="section-title">
+                <span class="sub-title">Get Started</span>
+                <h2>Request a Quote</h2>
+                <div class="line"></div>
+            </div>
+            <div class="quote-box" data-aos="fade-up">
+                <form class="contact-form">
+                    <div class="form-grid-2">
+                        <div class="form-group"><input type="text" placeholder="Your Name" required></div>
+                        <div class="form-group"><input type="email" placeholder="Your Email" required></div>
+                    </div>
+                    <div class="form-group">
+                        <select required style="color: #fff;">
+                            <option value="" disabled selected>Select Service</option>
+                            <option>Wedding</option>
+                            <option>Pre-Wedding</option>
+                            <option>Maternity</option>
+                            <option>Corporate</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><textarea rows="4" placeholder="Tell us about your event..."></textarea></div>
+                    <button type="submit" class="btn-primary">Send Quote Request</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <i class="fas fa-camera-retro"></i>
+                        <span>NEEL STUDIO</span>
+                    </div>
+                    <p>Capturing your most precious moments with cinematic elegance and artistic vision.</p>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <div class="footer-info-list">
+                        <a href="tel:+918390629068" class="footer-info-item"><i class="fas fa-phone"></i> <span>+91 83906 29068</span></a>
+                        <a href="mailto:hello@neelstudio.com" class="footer-info-item"><i class="fas fa-envelope"></i> <span>hello@neelstudio.com</span></a>
+                        <div class="footer-info-item"><i class="fas fa-location-dot"></i> <span>Lasur Tal. Chopda, Dist. Jalgaon</span></div>
+                    </div>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="https://wa.me/918390629068"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Neel Studio. All Rights Reserved.</p>
+                <p class="creator">Developed by Lalit mali(FrontendLalit)</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
